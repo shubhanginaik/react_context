@@ -1,5 +1,5 @@
 import React,{useReducer} from 'react';
-import { notes } from '../../notes';
+
 
 const initialState={
     notes:[
@@ -42,20 +42,26 @@ const reducer =(state,action) =>{
                 ],
             };
             case 'REMOVE_NOTE':
-                {
-                const newTodos=[...state.notes];
-                newTodos.splice(
-                    newTodos.findIndex((item)=>item.id === action.id),1
-             );
+                const updatearray = state.notes.filter((item) => item.id !== action.id);
              return{
                  ...state,
-                 notes:newTodos
-             }
-            }
+                 notes:updatearray,
+             };
+
+             case "DONE NOTE":
+                 const doneToggle = state.notes.map((item) =>{
+                     return item.id === action.id
+                     ? {...item,done: !item.done}
+                     : {...item};
+                 });
+                 return {
+                     ...state,
+                     notes: doneToggle,
+                 };
                 default:
                 return state;
         }
-    }
+    };
     
 
 export const Provider = ({children})=>{
@@ -75,11 +81,19 @@ export const Provider = ({children})=>{
         })
     }
 
+    const doneTodo = (id)=>{
+        dispatch({
+            type:"DONE NOTE",
+            id:id,
+        });
+    };
+
     const value = {
         notes:state.notes,
         addToDoItem:addToDoItem,
         removeToDo:removeToDo,
-    }
+        doneTodo:doneTodo,
+    };
 
     return ( 
     <NotesContext.Provider value={value}>
