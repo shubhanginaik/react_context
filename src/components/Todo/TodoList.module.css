@@ -33,3 +33,10 @@
 .delete:hover {
   color: white;
 }
+.edit {
+  position: absolute;
+  color: #4ea9cc;
+  top: 20px;
+  right: 40px;
+  cursor: pointer;
+}
