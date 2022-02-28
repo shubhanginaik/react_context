@@ -47,10 +47,13 @@ const TodoList = () => {
         <option value="false">Not done</option>
         <option value="all">All</option>
       </select>
+      
       {filterList.map((note) => {
+        if(note.title.toLowerCase().includes(search) || note.task.toLowerCase().includes(search)){
         return (
           <div
-            className={`${classes.todo} ${note.done ? classes.done : ""}`}
+            className={`${classes.todo} 
+            ${note.done ? classes.done : ""}`}
             key={note.id}
             onClick={() => ctx.doneTodo(note.id)}
           >
@@ -64,7 +67,9 @@ const TodoList = () => {
             </span>
           </div>
         );
+        } 
       })}
+    
     </div>
   );
 };
