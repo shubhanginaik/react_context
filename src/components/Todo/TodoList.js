@@ -32,7 +32,7 @@ const TodoList = () => {
   };
   const searchHandler =(e)=>{
     setsearch(e.target.value.toLowerCase());
-    console.log(search)
+    
   }
 
   return (
