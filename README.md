@@ -1,3 +1,7 @@
+# to do app with the use of `Redux` state management tool.
+Effectively use of Actions, reducer, diapatch and selector to create new todo, change state of todo and to delete to do.
+![todolist](./public/todolist.png)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
