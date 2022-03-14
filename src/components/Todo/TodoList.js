@@ -7,7 +7,6 @@ const TodoList = () => {
   const ctx = useContext(NotesContext);
   const [filteredValue, setFilteredValue] = useState();
   const [filterList, setFilteredList] = useState(ctx.notes);
-  const [search, setsearch]=useState();
 
   const removeHandler = (id) => {
     ctx.removeTodo(id);
@@ -30,30 +29,19 @@ const TodoList = () => {
   const filterHandler = (e) => {
     setFilteredValue(e.target.value);
   };
-  const searchHandler =(e)=>{
-    setsearch(e.target.value.toLowerCase());
-    
-  }
 
   return (
     <div className={classes.todos}>
       <h1>Notes:</h1>
-      <div>
-      <label>Search</label>
-      <input id="search" onChange={searchHandler}/>
-      </div>
       <select name="done" defaultValue="all" onChange={filterHandler}>
         <option value="true">Done</option>
         <option value="false">Not done</option>
         <option value="all">All</option>
       </select>
-      
       {filterList.map((note) => {
-        if(note.title.toLowerCase().includes(search) || note.task.toLowerCase().includes(search)){
         return (
           <div
-            className={`${classes.todo} 
-            ${note.done ? classes.done : ""}`}
+            className={`${classes.todo} ${note.done ? classes.done : ""}`}
             key={note.id}
             onClick={() => ctx.doneTodo(note.id)}
           >
@@ -67,9 +55,7 @@ const TodoList = () => {
             </span>
           </div>
         );
-        } 
       })}
-    
     </div>
   );
 };
